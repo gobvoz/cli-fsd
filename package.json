@@ -3,10 +3,21 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "keywords": [
+    "FSD",
+    "CLI",
+    "Feature-Sliced Design"
+  ],
+  "bin": {
+    "fsd": "index.js"
+  },
+  "author": "Gobvoz",
+  "license": "ISC",
+  "dependencies": {
+    "figlet": "^1.6.0"
+  }
 }
