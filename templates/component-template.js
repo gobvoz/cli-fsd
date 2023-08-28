@@ -1,5 +1,5 @@
 const componentTemplate = sliceName => {
-  return `import {memo} from 'react';
+  return `import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { classNames } from 'shared/libs/class-names';
