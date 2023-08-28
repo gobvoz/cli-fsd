@@ -21,7 +21,10 @@ const createTemplate = async (layer, sliceName) => {
   await createFolder('src', layer);
   await createFolder('src', layer, sliceName.kebabCase);
 
-  await createModel(layer, sliceName);
+  if (layer !== 'widgets') {
+    await createModel(layer, sliceName);
+  }
+
   await createUI(layer, sliceName);
 
   if (layer === 'pages') {
