@@ -7,17 +7,11 @@ import componentTemplate from '../templates/component-template.js';
 import storyTemplate from '../templates/story-template.js';
 import styleTemplate from '../templates/style-template.js';
 
+import createFolder from '../utils/create-folder.js';
+
 const createUI = async (layer, sliceName) => {
   const resolveUIPath = (...segments) =>
     path.resolve('src', layer, sliceName.kebabCase, 'ui', ...segments);
-
-  const createUIDir = async () => {
-    try {
-      await fs.mkdir(resolveUIPath());
-    } catch (error) {
-      log.warning(`Could not create UI directory for "${sliceName.kebabCase}"`);
-    }
-  };
 
   const createComponent = async () => {
     try {
@@ -35,7 +29,7 @@ const createUI = async (layer, sliceName) => {
     }
   };
 
-  await createUIDir();
+  await createFolder('src', layer, sliceName.kebabCase, 'ui');
   await createComponent();
 };
 
