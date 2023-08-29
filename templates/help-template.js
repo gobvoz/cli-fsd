@@ -1,7 +1,10 @@
 const helpTemplate = () => {
-  return `Utility to create slices for redux-toolkit in Feature-Sliced Design methodology.
+  return `Utility to create slices in Feature-Sliced Design methodology.
+Expect, that you have already installed react, typescript, @reduxjs/toolkit, @reduxjs/toolkit-query.
 
-Usage: fsd <layer> <slice-name>
+Usage: 
+  fsd init
+  fsd <layer> <slice-name>
 
 Layer:
   feature(s)  -  create feature slice
@@ -13,6 +16,7 @@ Slice name:
   <slice-name>  -  name of the slice
 
 Example:
+  fsd init
   fsd feature user
   fsd entities user
   fsd pages user

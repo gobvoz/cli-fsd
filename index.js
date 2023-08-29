@@ -3,6 +3,8 @@ import { camelCase, pascalCase, kebabCase, snakeCase } from './utils/case-helper
 import log from './utils/log.js';
 
 import createTemplate from './creators/create-template.js';
+import init from './init/init.js';
+
 import helpTemplate from './templates/help-template.js';
 import logoTemplate from './templates/logo-template.js';
 
@@ -24,6 +26,11 @@ const layerList = [
   'widget',
   'widgets',
 ];
+
+if (layer === 'init') {
+  await init(process.argv);
+  process.exit();
+}
 
 if (helpList.includes(layer)) {
   console.log(helpTemplate());

@@ -1,6 +1,6 @@
 {
-  "name": "cli-fsd",
-  "version": "1.1.0",
+  "name": "@gobvoz/cli-fsd",
+  "version": "0.1.1",
   "description": "",
   "main": "index.js",
   "type": "module",
