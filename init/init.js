@@ -1,5 +1,6 @@
 import path from 'path';
 import { existsSync as folderExist } from 'fs';
+import createFolder from '../utils/create-folder.js';
 
 import log from '../utils/log.js';
 
@@ -11,22 +12,22 @@ const init = async argv => {
   }
 
   try {
-    await fs.mkdir(path.resolve('src'));
+    await createFolder(path.resolve('src'));
 
-    await fs.mkdir(path.resolve('src', 'app'));
-    await fs.mkdir(path.resolve('src', 'process'));
-    await fs.mkdir(path.resolve('src', 'pages'));
-    await fs.mkdir(path.resolve('src', 'widgets'));
-    await fs.mkdir(path.resolve('src', 'features'));
-    await fs.mkdir(path.resolve('src', 'entities'));
-    await fs.mkdir(path.resolve('src', 'shared'));
+    await createFolder(path.resolve('src', 'app'));
+    await createFolder(path.resolve('src', 'process'));
+    await createFolder(path.resolve('src', 'pages'));
+    await createFolder(path.resolve('src', 'widgets'));
+    await createFolder(path.resolve('src', 'features'));
+    await createFolder(path.resolve('src', 'entities'));
+    await createFolder(path.resolve('src', 'shared'));
 
-    await fs.mkdir(path.resolve('src', 'app', 'providers'));
+    await createFolder(path.resolve('src', 'app', 'providers'));
 
-    await fs.mkdir(path.resolve('src', 'shared', 'assets'));
-    await fs.mkdir(path.resolve('src', 'shared', 'constants'));
-    await fs.mkdir(path.resolve('src', 'shared', 'libs'));
-    await fs.mkdir(path.resolve('src', 'shared', 'ui'));
+    await createFolder(path.resolve('src', 'shared', 'assets'));
+    await createFolder(path.resolve('src', 'shared', 'constants'));
+    await createFolder(path.resolve('src', 'shared', 'libs'));
+    await createFolder(path.resolve('src', 'shared', 'ui'));
   } catch (error) {
     log.error(`Could not create folder structure`);
     log.error(error);
