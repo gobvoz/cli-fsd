@@ -1,52 +1,34 @@
-import fs from 'fs/promises';
 import path from 'path';
 
 import log from '../utils/log.js';
+import createFolder from '../utils/create-folder.js';
 
-import reduxSliceTemplate from '../templates/redux-slice-template.js';
-import schemaTypeTemplate from '../templates/schema-type-template.js';
+import createModelType from './create-model-type.js';
+import createModelSlice from './create-model-slice.js';
+import createModelSelector from './create-model-selector.js';
+import createModelService from './create-model-service.js';
 
 const createModel = async (layer, sliceName) => {
-  const resolveModelPath = (...segments) =>
+  const resolvePath = (...segments) =>
     path.resolve('src', layer, sliceName.kebabCase, 'model', ...segments);
 
-  const createModelStructure = async () => {
+  const createFolderStructure = async () => {
     try {
-      await fs.mkdir(resolveModelPath());
-      await fs.mkdir(resolveModelPath('types'));
-      await fs.mkdir(resolveModelPath('slice'));
-      await fs.mkdir(resolveModelPath('selectors'));
-      await fs.mkdir(resolveModelPath('services'));
+      await createFolder(resolvePath());
+      await createFolder(resolvePath('types'));
+      await createFolder(resolvePath('slice'));
+      await createFolder(resolvePath('selectors'));
+      await createFolder(resolvePath('services'));
     } catch (error) {
-      log.warning(`Could not create model structure for "${sliceName.kebabCase}"`);
+      log.warning(`Could not create 'model' structure for "${sliceName.kebabCase}"`);
     }
   };
 
-  const createReduxSlice = async () => {
-    try {
-      await fs.writeFile(
-        resolveModelPath('slice', `${sliceName.kebabCase}.slice.ts`),
-        reduxSliceTemplate(sliceName),
-      );
-    } catch (error) {
-      log.error(`Could not create redux slice for "${sliceName.kebabCase}"`);
-    }
-  };
-
-  const createSchemaType = async () => {
-    try {
-      await fs.writeFile(
-        resolveModelPath('types', `${sliceName.kebabCase}.schema.ts`),
-        schemaTypeTemplate(sliceName),
-      );
-    } catch (error) {
-      log.error(`Could not create schema type for "${sliceName.kebabCase}"`);
-    }
-  };
-
-  await createModelStructure();
-  await createReduxSlice();
-  await createSchemaType();
+  await createFolderStructure();
+  await createModelType(layer, sliceName);
+  await createModelSlice(layer, sliceName);
+  await createModelSelector(layer, sliceName);
+  await createModelService(layer, sliceName);
 };
 
 export default createModel;

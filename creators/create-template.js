@@ -12,19 +12,16 @@ import log from '../utils/log.js';
 
 const createTemplate = async (layer, sliceName) => {
   if (folderExist(path.resolve('src', layer, sliceName.kebabCase))) {
-    log.error(`Could not create "${layer}/${sliceName.kebabCase}" directory`);
+    log.error(`Could not create '${layer}/${sliceName.kebabCase}' directory`);
     log.error(`folder already exists`);
     process.exit();
   }
 
-  await createFolder('src');
-  await createFolder('src', layer);
-  await createFolder('src', layer, sliceName.kebabCase);
+  await createFolder(path.resolve('src'));
+  await createFolder(path.resolve('src', layer));
+  await createFolder(path.resolve('src', layer, sliceName.kebabCase));
 
-  if (layer !== 'widgets') {
-    await createModel(layer, sliceName);
-  }
-
+  await createModel(layer, sliceName);
   await createUI(layer, sliceName);
 
   if (layer === 'pages') {
@@ -34,7 +31,7 @@ const createTemplate = async (layer, sliceName) => {
     await createPublicApi(layer, sliceName);
   }
 
-  log.done(`Successfully created ${layer}/${sliceName.kebabCase} template`);
+  log.done(`Successfully created '${layer}/${sliceName.kebabCase}' template`);
 };
 
 export default createTemplate;

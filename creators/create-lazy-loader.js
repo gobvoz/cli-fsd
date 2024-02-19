@@ -7,17 +7,16 @@ import createFolder from '../utils/create-folder.js';
 import lazyLoaderTemplate from '../templates/lazy-loader-template.js';
 
 const createLazyLoader = async (layer, sliceName) => {
-  const resolveUIPath = (...segments) =>
-    path.resolve('src', layer, sliceName.kebabCase, 'ui', ...segments);
+  const resolvePath = (...segments) => path.resolve('src', layer, sliceName.kebabCase, ...segments);
 
   const createLazyLoader = async () => {
     try {
       await fs.writeFile(
-        resolveUIPath(`${sliceName.kebabCase}.lazy.tsx`),
+        resolvePath('ui', `${sliceName.kebabCase}.lazy.tsx`),
         lazyLoaderTemplate(sliceName),
       );
     } catch (error) {
-      log.error(`Could not create UI component for "${sliceName.kebabCase}"`);
+      log.error(`Could not create 'UI lazy component' for "${sliceName.kebabCase}"`);
     }
   };
 

@@ -4,7 +4,7 @@ import createFolder from '../utils/create-folder.js';
 
 import log from '../utils/log.js';
 
-const init = async argv => {
+const init = async () => {
   if (folderExist(path.resolve('src'))) {
     log.error(`Could not create "src" directory`);
     log.error(`folder already exists`);

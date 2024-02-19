@@ -1,13 +1,12 @@
+import fs from 'fs/promises';
 import path from 'path';
 
 import log from '../utils/log.js';
 import createFolder from '../utils/create-folder.js';
 
-import createUIComponent from './create-ui-component.js';
-import createUIStyle from './create-ui-style.js';
-import createUIStory from './create-ui-story.js';
+import storyTemplate from '../templates/story-template.js';
 
-const createUI = async (layer, sliceName) => {
+const createUIStory = async (layer, sliceName) => {
   const resolvePath = (...segments) => path.resolve('src', layer, sliceName.kebabCase, ...segments);
 
   const createFolderStructure = async () => {
@@ -19,10 +18,19 @@ const createUI = async (layer, sliceName) => {
     }
   };
 
+  const createTemplate = async () => {
+    try {
+      await fs.writeFile(
+        resolvePath('ui', `${sliceName.kebabCase}.story.tsx`),
+        storyTemplate(layer, sliceName),
+      );
+    } catch (error) {
+      log.error(`Could not create 'ui/story' for "${sliceName.kebabCase}"`);
+    }
+  };
+
   await createFolderStructure();
-  await createUIComponent(layer, sliceName);
-  await createUIStyle(layer, sliceName);
-  await createUIStory(layer, sliceName);
+  await createTemplate();
 };
 
-export default createUI;
+export default createUIStory;

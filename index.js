@@ -15,7 +15,7 @@ console.log();
 const layer = process.argv[2];
 const sliceName = process.argv[3];
 
-const helpList = ['/h', '-h', '/help', '--help', 'help'];
+const helpList = ['/h', '-h', '/help', '--help', '-help', 'help', '/?', '-?', '?'];
 const layerList = [
   'feature',
   'features',

@@ -1,19 +1,16 @@
 import fs from 'fs/promises';
 import { existsSync as folderExist } from 'fs';
-import path from 'path';
 
 import log from '../utils/log.js';
 
-const createFolder = async (...pathParts) => {
+const createFolder = async (folderPath, silentMode) => {
   try {
-    const dirPath = path.resolve(...pathParts);
-
-    if (!folderExist(dirPath)) {
-      log.info(`Creating "${dirPath}" directory`);
-      await fs.mkdir(dirPath);
+    if (!folderExist(folderPath)) {
+      !silentMode && log.info(`Creating "${folderPath}" directory`);
+      await fs.mkdir(folderPath);
     }
   } catch (error) {
-    log.error(`Could not create "${dirPath}" directory`);
+    log.error(`Could not create "${folderPath}" directory`);
     process.exit();
   }
 };
