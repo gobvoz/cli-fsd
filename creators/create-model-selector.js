@@ -14,6 +14,7 @@ const createModelSelector = async (layer, sliceName) => {
       await createFolder(resolvePath('selectors'));
     } catch (error) {
       log.warning(`Could not create 'model/selectors' structure for "${sliceName.kebabCase}"`);
+      process.exit();
     }
   };
 

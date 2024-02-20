@@ -5,7 +5,7 @@ import log from '../utils/log.js';
 
 import lazyPublicApiTemplate from '../templates/lazy-public-api-template.js';
 
-const createPublicApi = async (layer, sliceName) => {
+const createLazyPublicApi = async (layer, sliceName) => {
   const resolvePath = (...segments) => path.resolve('src', layer, sliceName.kebabCase, ...segments);
 
   try {
@@ -15,4 +15,4 @@ const createPublicApi = async (layer, sliceName) => {
   }
 };
 
-export default createPublicApi;
+export default createLazyPublicApi;
